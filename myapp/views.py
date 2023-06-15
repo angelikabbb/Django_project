@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import CarForm
+from .forms import CarForm, ClientForm
+from .models import Car, Client
 
 # Create your views here.
 
@@ -60,8 +61,32 @@ def contacts(request, id):
     return HttpResponse(f'Page contacts, url_parametr_id = {url_id}, get_params - {get_params}')
 
 def clients(request):
-    pass
+    title = 'Клиенты'
+    clients = Client.objects.all()
+    context = {'title': title, 'menu': menu, 'clients': clients}
+    return render(request, 'myapp/clients.html', context=context)
+
+
+def add_client(request):
+    return render(request, 'myapp/client_add.html')
 
 def drivers(request):
     pass
+
+def add_client(request):
+
+    title = 'Добавить клиента'
+
+    if request.method == 'POST':
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'myapp/clients.html', {'title': title})
+
+    else:
+        form = ClientForm()
+
+    context = {'title': title, 'menu': menu, 'form': form}
+
+    return render(request, 'myapp/client_add.html', context=context)
 
