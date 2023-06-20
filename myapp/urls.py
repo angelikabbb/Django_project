@@ -11,7 +11,8 @@ urlpatterns = [
     path('add_car/', add_car, name='add_car'),
     path('drivers/', drivers, name='drivers'),
     path('add_driver/', add_driver, name='add_driver'),
+    path('clients/<int:pk>/', client_card, name='client_card'),
     path('clients/', clients, name='clients'),
-    path('add_client', add_client, name='add_client')
+    path('add_client/', add_client, name='add_client')
 ]
 

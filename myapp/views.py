@@ -1,4 +1,6 @@
-from django.shortcuts import render
+import datetime
+
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .forms import CarForm, ClientForm, DriverForm
 from .models import Car, Client, Driver
@@ -68,9 +70,6 @@ def clients(request):
     # print(clients)
 
 
-def add_client(request):
-    return render(request, 'myapp/client_add.html')
-
 def drivers(request):
     title = 'Водители'
     drivers = Driver.objects.all()
@@ -85,7 +84,7 @@ def add_driver(request):
         form = DriverForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'myapp/drivers.html', {'title': title})
+            return drivers(request)
 
     else:
         form = DriverForm()
@@ -101,8 +100,12 @@ def add_client(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)
         if form.is_valid():
-            form.save()
-            return render(request, 'myapp/clients.html', {'title': title})
+            instance = form.save(commit=False)
+            age = datetime.date.today().year - form.cleaned_data['birthday'].year
+            instance.age = age
+            instance.save()
+            # form.save()
+            return clients(request)
 
     else:
         form = ClientForm()
@@ -111,3 +114,18 @@ def add_client(request):
 
         return render(request, 'myapp/client_add.html', context=context)
 
+
+# def car_detail(request, pk):
+#     car = Car.objects.get(pk=pk)
+#     title = 'Car detail'
+#     context = {"object": car, 'title': title}
+#
+#     return render(request, 'myapp/car_detail.html', context=context)
+
+def client_card(request, pk):
+    title = 'Client Info'
+    client = Client.objects.get(pk=pk)
+    # client = get_object_or_404(Client, pk)
+    context = {'menu': menu, 'title': title, 'client': client}
+
+    return render(request, 'myapp/client_card.html', context=context)

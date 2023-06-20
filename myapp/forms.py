@@ -21,7 +21,9 @@ class CarForm(forms.Form):
 class ClientForm(ModelForm):
     class Meta:
         model = Client
-        exclude = ['age', 'name']
+        exclude = ['age']
+        # fields = ["__all__"]
+        # fields = ['name']
 
     birthday = forms.DateField(input_formats=DATE_INPUT_FORMATS, label='Дата рождения')
 
