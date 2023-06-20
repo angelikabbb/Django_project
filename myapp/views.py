@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import CarForm, ClientForm
-from .models import Car, Client
+from .forms import CarForm, ClientForm, DriverForm
+from .models import Car, Client, Driver
 
 # Create your views here.
 
@@ -65,13 +65,34 @@ def clients(request):
     clients = Client.objects.all()
     context = {'title': title, 'menu': menu, 'clients': clients}
     return render(request, 'myapp/clients.html', context=context)
+    # print(clients)
 
 
 def add_client(request):
     return render(request, 'myapp/client_add.html')
 
 def drivers(request):
-    pass
+    title = 'Водители'
+    drivers = Driver.objects.all()
+    context = {'title': title, 'menu': menu, 'drivers': drivers}
+    return render(request, 'myapp/drivers.html', context=context)
+
+
+def add_driver(request):
+    title = 'Добавить водителя'
+
+    if request.method == 'POST':
+        form = DriverForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'myapp/drivers.html', {'title': title})
+
+    else:
+        form = DriverForm()
+
+        context = {'title': title, 'menu': menu, 'form': form}
+
+        return render(request, 'myapp/driver_add.html', context=context)
 
 def add_client(request):
 
@@ -86,7 +107,7 @@ def add_client(request):
     else:
         form = ClientForm()
 
-    context = {'title': title, 'menu': menu, 'form': form}
+        context = {'title': title, 'menu': menu, 'form': form}
 
-    return render(request, 'myapp/client_add.html', context=context)
+        return render(request, 'myapp/client_add.html', context=context)
 

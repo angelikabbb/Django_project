@@ -24,3 +24,10 @@ class ClientForm(ModelForm):
         exclude = ['age', 'name']
 
     birthday = forms.DateField(input_formats=DATE_INPUT_FORMATS, label='Дата рождения')
+
+
+class DriverForm(ModelForm):
+
+    class Meta:
+        model = Driver
+        fields = ['name', 'last_name', 'phone', 'experience']

@@ -3,4 +3,28 @@
 {% block content %}
 
 <h1>Content about drivers</h1>
+Водители:
+<table id="clients" border="1">
+    <th>id</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Возраст</th>
+    <th>Опыт работы</th>
+    <th>Телефон</th>
+    <th>Предыдущее место работы</th>
+
+{% for driver in drivers %}
+    <tr>
+        <td align="center" >{{driver.id}}</td>
+        <td align="center">{{driver.name}}</td>
+        <td align="center">{{driver.last_name}}</td>
+        <td align="center">{{driver.age}}</td>
+        <td align="center">{{driver.experience}}</td>
+        <td align="center">{{driver.phone}}</td>
+        <td align="center">{{driver.workplace}}</td>
+    </tr>
+{% endfor %}
+
+</table>
+<p><a href="{% url 'add_driver' %}">Добавить водителя</a></p>
 {% endblock %}

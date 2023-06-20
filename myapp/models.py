@@ -10,15 +10,15 @@ class Person(models.Model):
     is_activated = models.BooleanField(verbose_name='activation')
 
     class Meta:
-        verbose_name = 'Chelovek'
-        verbose_name_plural = 'Ludi'
+        verbose_name = 'Человек'
+        verbose_name_plural = 'Люди'
 
 class Car(models.Model):
-    brand = models.CharField(max_length=30, verbose_name='marka')
-    model = models.CharField(max_length=30, verbose_name='model')
-    color = models.CharField(max_length=30, verbose_name='color')
-    power = models.IntegerField(verbose_name='power')
-    year = models.IntegerField(verbose_name='year')
+    brand = models.CharField(max_length=30, verbose_name='Марка')
+    model = models.CharField(max_length=30, verbose_name='Модель')
+    color = models.CharField(max_length=30, verbose_name='Цвет')
+    power = models.IntegerField(verbose_name='Мощность')
+    year = models.IntegerField(verbose_name='Год выпуска')
 
     # def __str__(self):
     #     return ''.join([self.brand.name, self.model.name])
@@ -36,3 +36,19 @@ class Client(models.Model):
     email = models.EmailField(verbose_name='Эл. почта')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Клиент'
+        verbose_name_plural = 'Клиенты'
+
+
+class Driver(models.Model):
+    name = models.CharField(max_length=30, verbose_name='Имя')
+    last_name = models.CharField(max_length=30, verbose_name='Фамилия')
+    age = models.IntegerField(verbose_name='Возраст', null=True)
+    experience = models.IntegerField(verbose_name='Опыт работы', null=False)
+    phone = models.CharField(max_length=30, verbose_name='Телефон')
+    workplace = models.CharField(max_length=50, verbose_name='Предыдущее место работы')
+
+    class Meta:
+        verbose_name = 'Водитель'
+        verbose_name_plural = 'Водители'
