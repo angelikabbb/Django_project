@@ -16,7 +16,9 @@
 {% for driver in drivers %}
     <tr>
         <td align="center" >{{driver.id}}</td>
-        <td align="center">{{driver.name}}</td>
+        <td align="center">
+            <a href="{% url 'driver_card' pk=driver.id %}">{{driver.name}}</a>
+        </td>
         <td align="center">{{driver.last_name}}</td>
         <td align="center">{{driver.age}}</td>
         <td align="center">{{driver.experience}}</td>

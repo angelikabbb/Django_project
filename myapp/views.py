@@ -21,27 +21,49 @@ def about(request):
 
 def cars(request):
     title = 'Машины'
-    context = {'title': title, 'menu': menu}
+    cars = Car.objects.all()
+    context = {'title': title, 'menu': menu, 'cars': cars}
     return render(request, 'myapp/cars.html', context=context)
 
+# def add_car(request):
+#     if request.method == 'GET':
+#         title = 'Добавить машину'
+#         form = CarForm()
+#         context = {'title': title, 'menu': menu, 'form': form}
+#         return render(request, 'myapp/car_add.html', context=context)
+#
+#     if request.method == 'POST':
+#         carform = CarForm(request.POST)
+#         if carform.is_valid():
+#             car = Car()
+#             car.brand = carform.cleaned_data['brand']
+#             car.model = carform.cleaned_data['model']
+#             car.color = carform.cleaned_data['color']
+#             car.power = carform.cleaned_data['power']
+#             car.year = carform.cleaned_data['year']
+#             car.save()
+#         return cars(request)
+
 def add_car(request):
-    if request.method == 'GET':
-        title = 'Добавить машину'
+    title = 'Добавить машину'
+
+    if request.method == 'POST':
+        form = CarForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return cars(request)
+
+    else:
         form = CarForm()
         context = {'title': title, 'menu': menu, 'form': form}
         return render(request, 'myapp/car_add.html', context=context)
 
-    if request.method == 'POST':
-        carform = CarForm(request.POST)
-        if carform.is_valid():
-            car = Car()
-            car.brand = carform.cleaned_data['brand']
-            car.model = carform.cleaned_data['model']
-            car.color = carform.cleaned_data['color']
-            car.power = carform.cleaned_data['power']
-            car.year = carform.cleaned_data['year']
-            car.save()
-        return cars(request)
+def car_card(request, pk):
+    car = Car.objects.get(pk=pk)
+    title = 'Car Info'
+    context = {'menu': menu, 'title': title, 'car': car}
+
+    return render(request, 'myapp/car_card.html', context=context)
 
 def login(request):
     title = 'Войти'
@@ -93,6 +115,14 @@ def add_driver(request):
 
         return render(request, 'myapp/driver_add.html', context=context)
 
+
+def driver_card(request, pk):
+    title = 'Driver Info'
+    driver = Driver.objects.get(pk=pk)
+    context = {'menu': menu, 'title': title, 'driver': driver}
+
+    return render(request, 'myapp/driver_card.html', context=context)
+
 def add_client(request):
 
     title = 'Добавить клиента'
@@ -115,12 +145,6 @@ def add_client(request):
         return render(request, 'myapp/client_add.html', context=context)
 
 
-# def car_detail(request, pk):
-#     car = Car.objects.get(pk=pk)
-#     title = 'Car detail'
-#     context = {"object": car, 'title': title}
-#
-#     return render(request, 'myapp/car_detail.html', context=context)
 
 def client_card(request, pk):
     title = 'Client Info'

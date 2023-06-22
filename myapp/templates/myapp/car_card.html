@@ -1,0 +1,34 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+<h1>{{title}}</h1>
+Клиент:
+<table border="2">
+    <tr>
+        <td>id</td>
+        <td>{{car.id}}</td>
+    </tr>
+    <tr>
+        <td>Марка</td>
+        <td>{{car.brand}}</td>
+    </tr>
+    <tr>
+        <td>Модель</td>
+        <td>{{car.model}}</td>
+    </tr>
+    <tr>
+        <td>Цвет</td>
+        <td>{{car.color}}</td>
+    </tr>
+    <tr>
+        <td>Мощность(л.с)</td>
+        <td>{{car.power}}</td>
+    </tr>
+    <tr>
+        <td>Год выпуска</td>
+        <td>{{car.year}}</td>
+    </tr>
+</table>
+
+{% endblock %}

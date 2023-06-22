@@ -5,7 +5,7 @@
 <h1>Содержание страницы машины</h1>
 Машины:
 
-<table id="clients" border="1">
+<table id="cars" border="1">
     <th>id</th>
     <th>Марка</th>
     <th>Модель</th>
@@ -16,7 +16,9 @@
 {% for car in cars %}
     <tr>
         <td align="center" >{{car.id}}</td>
-        <td align="center">{{car.brand}}</td>
+        <td align="center">
+            <a href="{% url 'car_card' pk=car.id %}">{{car.brand}}</a>
+        </td>
         <td align="center">{{car.model}}</td>
         <td align="center">{{car.color}}</td>
         <td align="center">{{car.power}}</td>

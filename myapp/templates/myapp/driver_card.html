@@ -1,0 +1,38 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+<h1>{{title}}</h1>
+Водители:
+<table border="2">
+    <tr>
+        <td>id</td>
+        <td>{{driver.id}}</td>
+    </tr>
+    <tr>
+        <td>Имя</td>
+        <td>{{driver.name}}</td>
+    </tr>
+    <tr>
+        <td>Фамилия</td>
+        <td>{{driver.last_name}}</td>
+    </tr>
+    <tr>
+        <td>Дата рождения</td>
+        <td>{{driver.age}}</td>
+    </tr>
+    <tr>
+        <td>Возраст</td>
+        <td>{{client.experience}}</td>
+    </tr>
+    <tr>
+        <td>Город</td>
+        <td>{{client.phone}}</td>
+    </tr>
+    <tr>
+        <td>Телефон</td>
+        <td>{{client.workspace}}</td>
+    </tr>
+</table>
+
+{% endblock %}

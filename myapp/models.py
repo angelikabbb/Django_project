@@ -3,6 +3,8 @@ from django.db import models
 #python manage.py makemigrations
 #python manage.py migrate
 # Create your models here.
+
+
 class Person(models.Model):
     name = models.CharField(max_length=100, verbose_name='name')
     age = models.IntegerField(verbose_name='age')
@@ -23,8 +25,8 @@ class Car(models.Model):
     # def __str__(self):
     #     return ''.join([self.brand.name, self.model.name])
     class Meta:
-        verbose_name = 'Mashina'
-        verbose_name_plural = 'Mashiny'
+        verbose_name = 'Машина'
+        verbose_name_plural = 'Машины'
 
 class Client(models.Model):
     name = models.CharField(max_length=30, verbose_name='Имя')
