@@ -54,3 +54,30 @@ class Driver(models.Model):
     class Meta:
         verbose_name = 'Водитель'
         verbose_name_plural = 'Водители'
+
+
+class Employee(models.Model):
+    edu_choices = [('middle', 'среднее'),
+                   ('high', 'высшее'),
+                   ('professional', 'профессиональное')
+                   ]
+
+    firstname = models.CharField(max_length=50, verbose_name='Имя')
+    lastname = models.CharField(max_length=50, verbose_name='Фамилия')
+    birthday = models.DateField(verbose_name='Дата рождения')
+    position = models.CharField(max_length=50, verbose_name='Должность')
+    education = models.CharField(max_length=50, choices=edu_choices)
+
+    def __str__(self):
+        return ' '.join([str(self.firstname), str(self.lastname)])
+
+    def get_absolute_url(self):
+        return reverse('employee_list')
+
+
+    class Meta:
+        verbose_name = 'Сотрудник'
+        verbose_name_plural = 'Сотрудники'
+
+
+
