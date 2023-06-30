@@ -3,8 +3,8 @@ import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .forms import CarForm, ClientForm, DriverForm
-from .models import Car, Client, Driver, Employee
-from django.views.generic import ListView, DetailView, CreateView
+from .models import *
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 # Create your views here.
 
@@ -158,18 +158,21 @@ def client_card(request, pk):
 class EmployeeList(ListView):
     model = Employee
     template_name = 'myapp/employee_list.html'
+    context_object_name = 'employees'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Сотрудники'
         context['count'] = Employee.objects.count()
+        context['menu'] = menu
         return context
 
 
 class EmployeeDetail(DetailView):
     model = Employee
     template_name = 'myapp/employee_detail.html'
-    # context_object_name = 'employee'
+    context_object_name = 'employee'
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -183,3 +186,9 @@ class EmployeeCreate(CreateView):
     model = Employee
     fields = '__all__'
     template_name = 'myapp/employee_form.html'
+
+
+class EmployeeUpdate(UpdateView):
+    model = Employee
+    fields = '__all__'
+    template_name_suffix = "_update_form"
