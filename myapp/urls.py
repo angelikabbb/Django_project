@@ -19,9 +19,10 @@ urlpatterns = [
     path('clients/', clients, name='clients'),
     path('add_client/', add_client, name='add_client'),
 
+    path('employees/<int:pk>/', EmployeeUpdate.as_view(), name='employee-update'),
+    path('employees/<int:pk>/', EmployeeDelete.as_view(), name='employee-delete'),
     path('employees/', EmployeeList.as_view(), name='employee_list'),
     path('employees/<int:pk>/', EmployeeDetail.as_view(), name='employee-detail'),
-    path('employees_form/', EmployeeCreate.as_view(), name='employee-create'),
-    # path('employees/<int:pk>/', EmployeeUpdate.as_view(), name='employee-update')
+    path('employee_form/', EmployeeCreate.as_view(), name='employee-form'),
 ]
 

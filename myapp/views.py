@@ -1,10 +1,10 @@
 import datetime
-
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .forms import CarForm, ClientForm, DriverForm
+from .forms import *
 from .models import *
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
 
@@ -12,6 +12,7 @@ menu = [{'title': 'О сайте', 'url_name': 'about'},
         {'title': 'Машины парка', 'url_name': 'cars'},
         {'title': 'Водители парка', 'url_name': 'drivers'},
         {'title': 'Клиенты', 'url_name': 'clients'},
+        {'title': 'Сотрудники', 'url_name': 'employee_list'}
         ]
 def index(request):
     return HttpResponse('<h1>Main page</h1>')
@@ -162,9 +163,11 @@ class EmployeeList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context['title'] = 'Сотрудники'
         context['count'] = Employee.objects.count()
         context['menu'] = menu
+
         return context
 
 
@@ -191,4 +194,10 @@ class EmployeeCreate(CreateView):
 class EmployeeUpdate(UpdateView):
     model = Employee
     fields = '__all__'
-    template_name_suffix = "_update_form"
+    template_name_suffix = "myapp/employee_update.html"
+
+
+class EmployeeDelete(DeleteView):
+    model = Employee
+    template_name = 'myapp/delete.html'
+    success_url = reverse_lazy('myapp:employee_list')
