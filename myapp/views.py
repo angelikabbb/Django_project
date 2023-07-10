@@ -8,11 +8,11 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 # Create your views here.
 
-menu = [{'title': 'О сайте', 'url_name': 'about'},
-        {'title': 'Машины парка', 'url_name': 'cars'},
-        {'title': 'Водители парка', 'url_name': 'drivers'},
-        {'title': 'Клиенты', 'url_name': 'clients'},
-        {'title': 'Сотрудники', 'url_name': 'employee_list'}
+menu = [{'title': 'О сайте', 'url_name': 'myapp:about'},
+        {'title': 'Машины парка', 'url_name': 'myapp:cars'},
+        {'title': 'Водители парка', 'url_name': 'myapp:drivers'},
+        {'title': 'Клиенты', 'url_name': 'myapp:clients'},
+        {'title': 'Сотрудники', 'url_name': 'myapp:employee_list'}
         ]
 def index(request):
     return HttpResponse('<h1>Main page</h1>')

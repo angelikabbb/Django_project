@@ -1,6 +1,7 @@
 {% extends 'myapp/base.html' %}
 
 {% block content %}
+
 <h1>{{title}}</h1>
 <ul>
   <li>Имя - {{object.firstname}}</li>
@@ -9,6 +10,7 @@
   <li>Должность - {{object.position}}</li>
   <li>Образование - {{object.education}}</li>
 </ul>
+
 <a href="{% url 'employee-update' pk=employee.id %}"> Изменить </a>
 <p><a href="{% url 'employee-delete' pk=employee.id %}"> Удалить </a></p>
 {% endblock %}
